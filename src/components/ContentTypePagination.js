@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 
 const ContentTypePagination = ({ previousPage, nextPage, contentType }) => {
+
   return (
     <nav
       className="pagination-single section-inner"
@@ -12,7 +13,7 @@ const ContentTypePagination = ({ previousPage, nextPage, contentType }) => {
 
       <div className="pagination-single-inner">
         {previousPage && (
-          <Link className="previous-post" to={previousPage.uri}>
+          <Link className="previous-post" to={`/${previousPage.categories.nodes[0].slug}${previousPage.uri}`}>
             <span className="arrow" aria-hidden="true">
               ←
             </span>
@@ -26,7 +27,7 @@ const ContentTypePagination = ({ previousPage, nextPage, contentType }) => {
         )}
 
         {nextPage && (
-          <Link className="next-post" to={nextPage.uri}>
+          <Link className="next-post" to={`/${nextPage.categories.nodes[0].slug}${nextPage.uri}`}>
             <span className="arrow" aria-hidden="true">
               →
             </span>

@@ -9,7 +9,7 @@ const PostCategories = ({ categories }) => {
       <span className="screen-reader-text">Categories</span>
       <div className="entry-categories-inner">
         {categories.nodes.map((category, index) => (
-          <Link to={category.uri} key={index} rel="category tag">
+          <Link to={`/${category.slug}`} key={index} rel="category tag">
             {category.name}
           </Link>
         ))}

@@ -8,9 +8,11 @@ import AuthorBio from "../../components/AuthorBio"
 import PostMeta from "../../components/PostMeta"
 import PostCategories from "../../components/PostCategories"
 import FeaturedMedia from "../../components/FeaturedMedia"
+import PostFromSameCategory from "../../components/PostsFromSameCategory"
 
-const post = ({ data }) => {
-  const { nextPage, previousPage, page } = data
+const post = (props) => {
+   // console.log(props)
+  const { nextPage, previousPage, page, relatedPosts } = props.data
   const {
     title,
     uri,
@@ -63,7 +65,9 @@ const post = ({ data }) => {
             previousPage={previousPage}
             nextPage={nextPage}
             contentType={"Post"}
+
           />
+          <PostFromSameCategory posts={relatedPosts} category={props.pageContext.mainCategory}/>
           <Comments />
         </div>
       </article>
@@ -72,17 +76,49 @@ const post = ({ data }) => {
 }
 
 export const query = graphql`
-  query post($id: String!, $nextPage: String, $previousPage: String) {
+  query post($id: String!, $nextPage: String, $previousPage: String, $mainCategory : String) {
     page: wpPost(id: { eq: $id }) {
       ...PostContent
     }
     nextPage: wpPost(id: { eq: $nextPage }) {
       title
       uri
+      categories {
+        nodes {
+          slug
+        }
+      }
     }
     previousPage: wpPost(id: { eq: $previousPage }) {
       title
       uri
+      categories {
+        nodes {
+          slug
+        }
+      }
+    }
+    relatedPosts: allWpPost(
+      filter: {categories: {nodes: {elemMatch: {slug: {eq: $mainCategory}}}}, id: {ne: $id}}
+      limit: 4
+    ) {
+      nodes {
+        uri
+        title
+        slug
+        date(formatString: "LL")
+        excerpt
+        featuredImage {
+          node {
+            altText
+            localFile {
+              ...HeroImage
+              publicURL
+            }
+            
+          }
+        }
+      }
     }
   }
 `

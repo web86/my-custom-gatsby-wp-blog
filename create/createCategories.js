@@ -11,6 +11,7 @@ module.exports = async ({ actions, graphql }, options) => {
           ... on WpCategory {
             name
             uri
+            slug
             databaseId
           }
         }
@@ -44,6 +45,7 @@ module.exports = async ({ actions, graphql }, options) => {
                 uri
                 id
                 date
+                slug
               }
             }
           }
@@ -53,7 +55,8 @@ module.exports = async ({ actions, graphql }, options) => {
 
         const chunkedContentNodes = chunk(data.allWpPost.nodes, perPage)
 
-        const categoryPath = category.uri
+        // const categoryPath = category.uri
+        const categoryPath = `/${category.slug}/`
 
         await Promise.all(
           chunkedContentNodes.map(async (nodesChunk, index) => {
@@ -67,7 +70,7 @@ module.exports = async ({ actions, graphql }, options) => {
               path: path,
               context: {
                 firstId: firstNode.id,
-                archiveType: "category",
+                  archiveType: "category",
                 archivePath: categoryPath,
                 uri: path,
                 categoryDatabaseId: category.databaseId,

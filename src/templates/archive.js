@@ -16,7 +16,7 @@ const Archive = (props) => {
     },
     pageContext: { archiveType, archivePath, uri },
   } = props
-
+// console.log(props)
   return (
     <Layout
       bodyClass="home blog wp-embed-responsive has-no-pagination showing-comments hide-avatars footer-top-visible customize-support">

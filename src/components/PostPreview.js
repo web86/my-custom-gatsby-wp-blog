@@ -5,6 +5,7 @@ import PostCategories from "./PostCategories"
 import FeaturedMedia from "./FeaturedMedia"
 
 const PostPreview = ({ post, isLast }) => {
+  //console.log(post)
   return (
     <>
       <article
@@ -17,7 +18,7 @@ const PostPreview = ({ post, isLast }) => {
 
             <h2 className="entry-title heading-size-1">
               <Link
-                to={post.uri}
+                to={`/${post.categories.nodes[0].slug}${post.uri}`}
                 dangerouslySetInnerHTML={{ __html: post.title }}
               />
             </h2>

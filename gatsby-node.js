@@ -3,6 +3,8 @@ const glob = require(`glob`)
 
 const createBlog = require(`./create/createBlog`)
 const createContentTypes = require(`./create/createContentTypes`)
+// const createContentTypePost = require(`./create/createContentTypesPost`)
+// const createContentTypePage = require(`./create/createContentTypesPage`)
 const createCategories = require(`./create/createCategories`)
 const createAuthors = require(`./create/createAuthors`)
 
@@ -22,7 +24,8 @@ exports.createPages = async (props) => {
     }
   `)
 
-  const perPage = wpSettings.wp.readingSettings.postsPerPage || 10
+  // const perPage = wpSettings.wp.readingSettings.postsPerPage || 2
+  const perPage =  2
   const blogURI = "/"
   const templates = getTemplates()
 
