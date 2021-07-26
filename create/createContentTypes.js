@@ -43,7 +43,7 @@ module.exports = async ({ actions, graphql }, options) => {
             ${gatsbyNodeListFieldName} {
               nodes {
                 id
-                slug
+                uri
                 categories {
                     nodes {
                         slug
@@ -59,7 +59,7 @@ module.exports = async ({ actions, graphql }, options) => {
                 nodes.map(async (node, i) => {
                     await actions.createPage({
                         component: resolve(contentTypeTemplate),
-                        path: `/${node.categories.nodes[0].slug}/${node.slug}`,
+                        path: node.uri,
                         context: {
                             mainCategory: node.categories.nodes[0].slug,
                             id: node.id,

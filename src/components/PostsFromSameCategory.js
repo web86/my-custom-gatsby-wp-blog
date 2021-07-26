@@ -22,7 +22,7 @@ const PostFromSameCategory = ({posts}) => {
                         <div className="entry-header-inner section-inner medium">
                             <h3 className="entry-title heading-size-1">
                                 <Link
-                                    to={`/${post.categories.nodes[0].slug}${post.uri}`}
+                                    to={post.uri}
                                     dangerouslySetInnerHTML={{ __html: post.title }}
                                 />
                             </h3>

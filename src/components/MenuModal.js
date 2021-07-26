@@ -8,7 +8,7 @@ import SocialMenu from "./SocialMenu"
 const MenuModal = ({ isActive, toggleBackdrop }) => {
   const { wpMenu } = useStaticQuery(graphql`
     {
-      wpMenu(slug: { eq: "extended" }) {
+      wpMenu(slug: { eq: "primary" }) {
         name
         menuItems {
           nodes {
