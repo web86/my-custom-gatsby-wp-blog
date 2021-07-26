@@ -9,6 +9,7 @@ import PostMeta from "../../components/PostMeta"
 import PostCategories from "../../components/PostCategories"
 import FeaturedMedia from "../../components/FeaturedMedia"
 import PostFromSameCategory from "../../components/PostsFromSameCategory"
+import { DiscussionEmbed } from "disqus-react"
 
 const post = (props) => {
    // console.log(props)
@@ -24,6 +25,11 @@ const post = (props) => {
     author,
     date,
   } = page
+
+  const disqusConfig = {
+    shortname: process.env.GATSBY_DISQUS_NAME,
+    config: { identifier: post.uri },
+  }
 
   return (
     <Layout
@@ -58,7 +64,7 @@ const post = (props) => {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
-
+        <DiscussionEmbed {...disqusConfig} />
         <div className="section-inner">
           <AuthorBio author={author} />
           <ContentTypePagination
@@ -67,8 +73,10 @@ const post = (props) => {
             contentType={"Post"}
 
           />
-          <PostFromSameCategory posts={relatedPosts} category={props.pageContext.mainCategory}/>
-          <Comments />
+          <PostFromSameCategory posts={relatedPosts}/>
+
+
+
         </div>
       </article>
     </Layout>
@@ -116,6 +124,11 @@ export const query = graphql`
               publicURL
             }
             
+          }
+        }
+        categories {
+          nodes {
+            slug
           }
         }
       }

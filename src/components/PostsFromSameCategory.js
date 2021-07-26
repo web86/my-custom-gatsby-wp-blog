@@ -4,7 +4,7 @@ import PostMeta from "./PostMeta"
 import PostCategories from "./PostCategories"
 import FeaturedMedia from "./FeaturedMedia"
 
-const PostFromSameCategory = ({category, posts}) => {
+const PostFromSameCategory = ({posts}) => {
     // category:wp
     // posts []
     // console.log(posts);
@@ -12,6 +12,7 @@ const PostFromSameCategory = ({category, posts}) => {
         <>
         {posts.nodes &&
             posts.nodes.map(post => {
+
             return (
                 <div
                     className={`post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized`}
@@ -21,7 +22,7 @@ const PostFromSameCategory = ({category, posts}) => {
                         <div className="entry-header-inner section-inner medium">
                             <h3 className="entry-title heading-size-1">
                                 <Link
-                                    to={`/${category}${post.uri}`}
+                                    to={`/${post.categories.nodes[0].slug}${post.uri}`}
                                     dangerouslySetInnerHTML={{ __html: post.title }}
                                 />
                             </h3>

@@ -17,6 +17,7 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
+    "disqus-react": "^1.1.1",
     "dotenv": "^9.0.2",
     "gatsby": "^3.5.0",
     "gatsby-plugin-image": "^1.5.0",
