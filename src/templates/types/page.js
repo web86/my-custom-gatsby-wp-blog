@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../../components/Layout"
+import LayoutAntd from "../../components/LayoutAntd"
 import Seo from "../../components/Seo"
 import FeaturedMedia from "../../components/FeaturedMedia"
 
@@ -9,7 +9,7 @@ const page = ({ data }) => {
   const { title, content, featuredImage, excerpt, databaseId, uri } = page
 
   return (
-    <Layout
+    <LayoutAntd
       bodyClass={`page-template-default page page-id-${databaseId} wp-embed-responsive singular missing-post-thumbnail has-no-pagination not-showing-comments footer-top-visible customize-support`}
     >
       <Seo title={title} description={excerpt} socialImage={featuredImage?.node} uri={uri} />
@@ -36,7 +36,7 @@ const page = ({ data }) => {
           />
         </div>
       </article>
-    </Layout>
+    </LayoutAntd>
   )
 }
 

@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../../components/Layout"
+import LayoutAntd from "../../components/LayoutAntd"
+// import Layout from "../../components/Layout"
 import Seo from "../../components/Seo"
 import Comments from "../../components/Comments"
 import ContentTypePagination from "../../components/ContentTypePagination"
@@ -32,7 +33,7 @@ const post = (props) => {
   }
 
   return (
-    <Layout
+    <LayoutAntd
       bodyClass={`post-template-default single single-post postid-${databaseId} single-format-standard wp-embed-responsive singular has-post-thumbnail has-single-pagination showing-comments footer-top-visible customize-support`}
     >
       <Seo title={title} description={excerpt} socialImage={featuredImage?.node} uri={uri} />
@@ -79,7 +80,7 @@ const post = (props) => {
 
         </div>
       </article>
-    </Layout>
+    </LayoutAntd>
   )
 }
 

@@ -63,7 +63,21 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-antd`,
+      options: {
+        style: true
+      },
+    },
     `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-less`,
+      options: {
+        lessOptions: {
+          javascriptEnabled: true,
+        },
+      },
+    },
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
