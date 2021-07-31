@@ -3,46 +3,51 @@ import { Link } from "gatsby"
 import PostMeta from "./PostMeta"
 import PostCategories from "./PostCategories"
 import FeaturedMedia from "./FeaturedMedia"
+import { SwapRightOutlined } from "@ant-design/icons"
 
 const PostFromSameCategory = ({posts}) => {
     // category:wp
     // posts []
     // console.log(posts);
     return (
-        <>
+        <div className="related-posts">
+            <h3>
+                Новое из этой же категории:
+            </h3>
         {posts.nodes &&
             posts.nodes.map(post => {
 
             return (
                 <div
-                    className={`post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized`}
+                    className={`post-from-same-category`}
                     key={post.slug}
                 >
-                    <header className="entry-header has-text-align-center">
-                        <div className="entry-header-inner section-inner medium">
-                            <h3 className="entry-title heading-size-1">
-                                <Link
-                                    to={post.uri}
-                                    dangerouslySetInnerHTML={{ __html: post.title }}
-                                />
-                            </h3>
+                    <header className="entry-header">
+                        <div className="entry-header-inner">
                             <p>
                                 {post.date}
                             </p>
                         </div>
                     </header>
-
-                    <FeaturedMedia image={post.featuredImage} />
-
+                    <Link to={post.uri}>
+                        <FeaturedMedia image={post.featuredImage} />
+                    </Link>
                     <div className="post-inner thin ">
+                        <h3 className="entry-title">
+                            <Link
+                                to={post.uri}
+                                dangerouslySetInnerHTML={{ __html: post.title }}
+                            />
+                        </h3>
                         <div className="entry-content">
                             <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+                            <Link to={post.uri}>Подробнее <SwapRightOutlined/></Link>
                         </div>
                     </div>
                 </div>
             )
         })}
-        </>
+        </div>
     )
 }
 

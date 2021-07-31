@@ -1,8 +1,18 @@
+#GatsbyBody {
+    font-size: 16px;
+}
+
 /* -------------------------------------------------------------------------- */
 
 /*	5. Menu Modal
 /* -------------------------------------------------------------------------- */
-
+#GatsbyBody.backdrop {
+    left: 0;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
 .menu-modal {
     background: #fff;
     display: none;
@@ -16,18 +26,8 @@
     top: 0;
     transition: opacity 0.25s ease-in, left 0s 0.25s, right 0s 0.25s;
     z-index: 99;
-}
 
-.admin-bar .menu-modal {
-    top: 32px;
 }
-
-@media (max-width: 782px) {
-    .admin-bar .menu-modal {
-        top: 46px;
-    }
-}
-
 .menu-modal.show-modal {
     display: flex;
 }
@@ -58,11 +58,14 @@
 button.close-nav-toggle {
     align-items: center;
     display: flex;
-    font-size: 1.6rem;
+    font-size: 16px;
     font-weight: 500;
     justify-content: flex-end;
-    padding: 3.1rem 0;
+    padding: 20px 0;
     width: 100%;
+    border: none;
+    background: none;
+    padding-right: 20px;
 }
 
 button.close-nav-toggle svg {
@@ -84,6 +87,7 @@ button.close-nav-toggle .toggle-text {
     position: relative;
     left: calc(50% - 50vw);
     width: 100vw;
+    padding-right:1em;
 }
 
 .modal-menu li {
@@ -99,9 +103,10 @@ button.close-nav-toggle .toggle-text {
 
 .modal-menu > li > a,
 .modal-menu > li > .ancestor-wrapper > a {
-    font-size: 2rem;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: -0.0375em;
+    padding:20px 8px;
 }
 
 .modal-menu > li:last-child {
@@ -125,7 +130,8 @@ button.close-nav-toggle .toggle-text {
 .modal-menu a:hover,
 .modal-menu li.current-menu-item > .ancestor-wrapper > a,
 .modal-menu li.current_page_ancestor > .ancestor-wrapper > a {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #db3157;
 }
 
 button.sub-menu-toggle {
@@ -229,16 +235,6 @@ button.sub-menu-toggle.active svg {
     }
 }
 
-/* Expanded Menu ----------------------------- */
-
-.expanded-menu {
-    display: none;
-}
-
-.mobile-menu {
-    display: block;
-}
-
 /* Menu Bottom ------------------------------- */
 
 .menu-bottom {
@@ -264,4 +260,121 @@ button.sub-menu-toggle.active svg {
 
 .menu-bottom .social-menu {
     justify-content: center;
+}
+
+/* -------------------------------------------------------------------------- */
+
+/*	Media Queries
+/* -------------------------------------------------------------------------- */
+
+@media (min-width: 700px) {
+    /* Menu Modal ---------------------------- */
+
+
+
+    button.close-nav-toggle {
+        font-size: 20px;
+        padding: 30px 0;
+    }
+
+    button.close-nav-toggle svg {
+        height: 25px;
+        width: 25px;
+    }
+
+    button.close-nav-toggle .toggle-text {
+        margin-right: 20px;
+    }
+
+    .modal-menu {
+        left: auto;
+        width: 100%;
+    }
+
+    .modal-menu > li > a,
+    .modal-menu > li > .ancestor-wrapper > a {
+        font-size: 30px;
+        padding: 20px 0;
+    }
+
+    .modal-menu ul li {
+        border-left-color: transparent;
+    }
+
+    .modal-menu > li > .ancestor-wrapper > button.sub-menu-toggle {
+        padding: 0 3rem;
+    }
+
+    .modal-menu > li > .ancestor-wrapper > button.sub-menu-toggle svg {
+        height: 1.1rem;
+        width: 1.8rem;
+    }
+
+    .menu-bottom {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 4.4rem 0;
+    }
+
+    .menu-copyright {
+        display: block;
+        flex-shrink: 0;
+        margin-right: 4rem;
+    }
+
+}
+@media (min-width: 1000px) {
+    /* Menu Modal ---------------------------- */
+
+    .menu-modal {
+        opacity: 1;
+        justify-content: flex-end;
+        padding: 0;
+        transition: background-color 0.3s ease-in, left 0s 0.3s, right 0s 0.3s;
+    }
+
+    .menu-modal.cover-modal {
+        background: rgba(0, 0, 0, 0);
+    }
+
+    .menu-modal.active {
+        background: rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease-out;
+    }
+
+    .menu-wrapper.section-inner {
+        width: calc(100% - 30px);
+    }
+
+    .menu-modal-inner {
+        box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        padding: 0;
+        transform: translateX(20rem);
+        transition: transform 0.2s ease-in, opacity 0.2s ease-in;
+        width: 500px;
+    }
+
+    .menu-modal.active .menu-modal-inner {
+        opacity: 1;
+        transform: translateX(0);
+        transition-timing-function: ease-out;
+    }
+
+    .mobile-menu {
+        display: none;
+    }
+
+    .expanded-menu {
+        display: block;
+    }
+
+    .menu-bottom {
+        padding: 6rem 0;
+    }
+
+    .menu-bottom .social-menu {
+        justify-content: flex-start;
+    }
 }

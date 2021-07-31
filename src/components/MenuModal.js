@@ -90,37 +90,7 @@ const MenuModal = ({ isActive, toggleBackdrop }) => {
               </ul>
             </nav>
 
-            <nav className="mobile-menu" aria-label="Mobile" role="navigation">
-              <ul className="modal-menu reset-list-style">
-                {wpMenu.menuItems.nodes.map((menuItem, i) => {
-                  const path = menuItem?.connectedNode?.node?.uri ?? menuItem.url
 
-                  const itemId = "modal-mobile-menu-item-" + menuItem.databaseId
-
-                  return (
-                    <li
-                      id={itemId}
-                      key={itemId}
-                      className={
-                        "menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home " +
-                        itemId
-                      }
-                    >
-                      <div className="ancestor-wrapper">
-                        <UniversalLink
-                          to={path}
-                          activeClassName={
-                            "current-menu-item current_page_item"
-                          }
-                        >
-                          {menuItem.label}
-                        </UniversalLink>
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
-            </nav>
           </div>
 
           <div className="menu-bottom">

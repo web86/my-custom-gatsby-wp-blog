@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import { SwapLeftOutlined, SwapRightOutlined } from '@ant-design/icons'
 
 const renderPreviousLink = ({ hasPreviousPage, currentPage, archivePath }) => {
   let previousLink = null
@@ -13,20 +14,11 @@ const renderPreviousLink = ({ hasPreviousPage, currentPage, archivePath }) => {
   if (hasPreviousPage) {
     return (
       <Link className={"prev page-numbers"} to={previousLink}>
-        <span aria-hidden="true">←</span>
+        <span aria-hidden="true"><SwapLeftOutlined /></span>
         <span className="nav-prev-text">
-          Newer <span className="nav-short">Posts</span>
+          <span className="nav-short">Назад</span>
         </span>
       </Link>
-    )
-  } else {
-    return (
-      <span className={"prev page-numbers placeholder"} aria-hidden="true">
-        <span aria-hidden="true">←</span>
-        <span className="nav-prev-text">
-          Newer <span className="nav-short">Posts</span>
-        </span>
-      </span>
     )
   }
 }
@@ -39,19 +31,10 @@ const renderNextLink = ({ hasNextPage, currentPage, archivePath }) => {
         to={`${archivePath}page/${currentPage + 1}`}
       >
         <span className="nav-next-text">
-          Older <span className="nav-short">Posts</span>
+          <span className="nav-short">Далее</span>
         </span>
-        {"->"}
+        <SwapRightOutlined />
       </Link>
-    )
-  } else {
-    return (
-      <span className={"next page-numbers placeholder"} aria-hidden="true">
-        <span className="nav-next-text">
-          Older <span className="nav-short">Posts</span>
-        </span>
-        {"->"}
-      </span>
     )
   }
 }
@@ -136,25 +119,17 @@ const ArchivePagination = ({
   }
 
   return (
-    <div className="pagination-wrapper section-inner">
-      <hr
-        className="styled-separator pagination-separator is-style-wide"
-        aria-hidden="true"
-      />
-
       <nav
         className="navigation pagination"
         role="navigation"
         aria-label="Posts"
       >
-        <h2 className="screen-reader-text">Posts navigation</h2>
         <div className="nav-links">
           {renderPreviousLink({ hasPreviousPage, currentPage, archivePath })}
           {renderPagesInBetween({ currentPage, pageCount, archivePath })}
           {renderNextLink({ hasNextPage, currentPage, archivePath })}
         </div>
       </nav>
-    </div>
   )
 }
 

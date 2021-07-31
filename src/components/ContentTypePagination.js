@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import { SwapLeftOutlined, SwapRightOutlined } from '@ant-design/icons'
 
 const ContentTypePagination = ({ previousPage, nextPage, contentType }) => {
 
@@ -9,13 +10,10 @@ const ContentTypePagination = ({ previousPage, nextPage, contentType }) => {
       aria-label={contentType}
       role="navigation"
     >
-      <hr className="styled-separator is-style-wide" aria-hidden="true" />
-
-      <div className="pagination-single-inner">
         {previousPage && (
           <Link className="previous-post" to={previousPage.uri}>
             <span className="arrow" aria-hidden="true">
-              ←
+              <SwapLeftOutlined/>{' '}
             </span>
             <span className="title">
               <span
@@ -28,20 +26,18 @@ const ContentTypePagination = ({ previousPage, nextPage, contentType }) => {
 
         {nextPage && (
           <Link className="next-post" to={nextPage.uri}>
-            <span className="arrow" aria-hidden="true">
-              →
-            </span>
             <span className="title">
               <span
                 className="title-inner"
                 dangerouslySetInnerHTML={{ __html: nextPage.title }}
               />
             </span>
+            <span className="arrow" aria-hidden="true">
+              {' '}<SwapRightOutlined/>
+            </span>
           </Link>
         )}
-      </div>
 
-      <hr className="styled-separator is-style-wide" aria-hidden="true" />
     </nav>
   )
 }

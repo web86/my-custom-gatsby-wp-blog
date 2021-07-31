@@ -1,22 +1,21 @@
 import React from "react"
 import { Link } from "gatsby"
 import PostMeta from "./PostMeta"
-import PostCategories from "./PostCategories"
 import FeaturedMedia from "./FeaturedMedia"
+import { SwapRightOutlined } from "@ant-design/icons"
 
 const PostPreview = ({ post, isLast }) => {
   //console.log(post)
   return (
     <>
       <article
-        className={`post-${post.databaseId} post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized`}
+        className={`post-${post.databaseId} post-preview`}
         id={`post-${post.databaseId}`}
       >
-        <header className="entry-header has-text-align-center">
-          <div className="entry-header-inner section-inner medium">
-            <PostCategories categories={post.categories} />
+        <header className="entry-header">
+          <div className="entry-header-inner">
 
-            <h2 className="entry-title heading-size-1">
+            <h2 className="entry-title ">
               <Link
                 to={post.uri}
                 dangerouslySetInnerHTML={{ __html: post.title }}
@@ -27,26 +26,26 @@ const PostPreview = ({ post, isLast }) => {
               title={post.title}
               author={post.author}
               date={post.date}
+              categories={post.categories}
             />
           </div>
         </header>
-
-        <FeaturedMedia image={post.featuredImage} />
-
+        <Link to={post.uri}>
+          <FeaturedMedia image={post.featuredImage} />
+        </Link>
         <div className="post-inner thin ">
           <div className="entry-content">
             <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+            <p>
+              <Link to={post.uri} className="more">
+                Читать полностью <SwapRightOutlined />
+              </Link>
+            </p>
           </div>
         </div>
+
       </article>
 
-      {!isLast && (
-        <hr
-          key={post.postId + "-hr"}
-          className="post-separator styled-separator is-style-wide section-inner"
-          aria-hidden="true"
-        />
-      )}
     </>
   )
 }

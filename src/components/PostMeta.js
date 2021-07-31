@@ -3,20 +3,27 @@ import AuthorIcon from "../assets/svg/author.inline.svg"
 import { Link } from "gatsby"
 import DateIcon from "../assets/svg/date.inline.svg"
 import CommentIcon from "../assets/svg/comment.inline.svg"
+import PostCategories from "./PostCategories"
+import { EyeOutlined } from '@ant-design/icons'
 
-const PostMeta = ({ author, title, date }) => {
+const PostMeta = ({ author, title, date, categories }) => {
   author = author?.node
   return (
-    <div className="post-meta-wrapper post-meta-single post-meta-single-top">
+    <div className="post-meta-wrapper">
       <ul className="post-meta">
+        <li className="post-date meta-wrapper">
+          <span className="meta-icon">
+            <DateIcon />
+          </span>
+          <span className="meta-text">{date}</span>
+        </li>
         <li className="post-author meta-wrapper">
           <span className="meta-icon">
-            <span className="screen-reader-text">Post author</span>
             <AuthorIcon />
           </span>
           <span className="meta-text">
-            By{" "}
-            <Link to={author.uri}>
+            Автор{" "}
+            <Link to="/contactus/">
               {author.firstName
                 ? author.lastName
                   ? author.firstName + " " + author.lastName
@@ -25,26 +32,15 @@ const PostMeta = ({ author, title, date }) => {
             </Link>
           </span>
         </li>
-        <li className="post-date meta-wrapper">
-          <span className="meta-icon">
-            <span className="screen-reader-text">Post date</span>
-            <DateIcon />
-          </span>
-          <span className="meta-text">{date}</span>
+        <li className="post-categs">
+          <PostCategories categories={categories}/>
         </li>
         <li className="post-comment-link meta-wrapper">
           <span className="meta-icon">
-            <CommentIcon />
+            <EyeOutlined />
           </span>
           <span className="meta-text">
-            <a href="#respond">
-              {/*TODO: Dynamic comments*/}
-              No Comments
-              <span className="screen-reader-text">
-                {" "}
-                on <span dangerouslySetInnerHTML={{ __html: title }} />
-              </span>
-            </a>
+              1882 просмотров
           </span>
         </li>
       </ul>

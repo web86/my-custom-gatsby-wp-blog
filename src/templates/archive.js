@@ -1,16 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
-// import PostEntry from "../../components/post-entry"
-// import Layout from "../components/Layout"
 import LayoutAntd from "../components/LayoutAntd"
 import Seo from "../components/Seo"
-// import SEO from "../../components/seo"
-// import NextIcon from "../../components/icons/next"
-// import PreviousIcon from "../../components/icons/previous"
 import PostPreview from "../components/PostPreview"
 import ArchivePagination from "../components/ArchivePagination"
-
-import { Row, Col} from "antd"
+import { Breadcrumb } from 'gatsby-plugin-breadcrumb'
 
 const Archive = (props) => {
   const {
@@ -19,16 +13,26 @@ const Archive = (props) => {
     },
     pageContext: { archiveType, archivePath, uri },
   } = props
-// console.log(props)
+
+  const {
+    breadcrumb: { crumbs },
+  } = props.pageContext
+
+  // console.log(props)
 
 
   return (
     <LayoutAntd
-      bodyClass="home blog wp-embed-responsive has-no-pagination showing-comments hide-avatars footer-top-visible customize-support">
+      className="home">
       <Seo title="Home" description="Welcome to the Twenty Nineteen Theme." uri={uri} />
+      { props.uri !== "/" &&
+      <Breadcrumb crumbs={crumbs}
+                  crumbSeparator=" / "
+                  crumbLabel={props.pageContext.catName}
+                     />
+      }
 
-
-          {nodes &&
+      {nodes &&
         nodes.map((post, index) => {
           return (
               <PostPreview
@@ -39,14 +43,10 @@ const Archive = (props) => {
           )
         })}
 
-          <ArchivePagination {...pageInfo} archivePath={archivePath} />
-
-
-
+      <ArchivePagination {...pageInfo} archivePath={archivePath} />
     </LayoutAntd>
   )
 }
-
 export const query = graphql`
   query ArchivePage(
     $offset: Int!

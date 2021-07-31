@@ -75,9 +75,9 @@ module.exports = async ({ actions, graphql }, options) => {
           query ALL_CONTENT_NODES {
             ${gatsbyNodeListFieldName} {
               nodes {
-                uri
                 id
-                ${graphqlSingleName === "page" ? "isFrontPage" : ""}
+                slug
+               
               }
             }
           }
@@ -89,7 +89,7 @@ module.exports = async ({ actions, graphql }, options) => {
             nodes.map(async (node, i) => {
                 await actions.createPage({
                     component: resolve(contentTypeTemplate),
-                    path: node.isFrontPage ? "/" : node.uri,
+                    path: "/"+ node.slug + "/",
                     context: {
                         id: node.id,
                         nextPage: (nodes[i - 1] || {}).id,

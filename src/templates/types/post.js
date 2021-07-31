@@ -1,11 +1,10 @@
 import React from "react"
-import { graphql } from "gatsby"
-import LayoutAntd from "../../components/LayoutAntd"
-// import Layout from "../../components/Layout"
+import { graphql, Link } from "gatsby"
+import Layout from "../../components/Layout"
 import Seo from "../../components/Seo"
-import Comments from "../../components/Comments"
+
+// import Comments from "../../components/Comments"
 import ContentTypePagination from "../../components/ContentTypePagination"
-import AuthorBio from "../../components/AuthorBio"
 import PostMeta from "../../components/PostMeta"
 import PostCategories from "../../components/PostCategories"
 import FeaturedMedia from "../../components/FeaturedMedia"
@@ -27,21 +26,34 @@ const post = (props) => {
     date,
   } = page
 
+
+  // const customCrumbLabel = location.pathname.toLowerCase().replace('-', ' ')
+
   const disqusConfig = {
     shortname: process.env.GATSBY_DISQUS_NAME,
     config: { identifier: post.uri },
   }
 
   return (
-    <LayoutAntd
-      bodyClass={`post-template-default single single-post postid-${databaseId} single-format-standard wp-embed-responsive singular has-post-thumbnail has-single-pagination showing-comments footer-top-visible customize-support`}
+    <Layout
+        className="post"
     >
       <Seo title={title} description={excerpt} socialImage={featuredImage?.node} uri={uri} />
 
       <article
-        className={`post-${databaseId} post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized`}
+        className={`post-${databaseId} post`}
         id={`post-${databaseId}`}
       >
+        <nav aria-label="Breadcrumb" className="breadcrumb">
+          <div className="breadcrumb__list">
+          <Link to="/">Главная</Link>
+          <span className="breadcrumb__separator">/</span>
+          <Link to={`/${categories.nodes[0].slug}`}>{categories.nodes[0].name}</Link>
+          <span className="breadcrumb__separator">/</span>
+          <span>{title}</span>
+        </div>
+        </nav>
+
         <header className="entry-header has-text-align-center header-footer-group">
           <div className="entry-header-inner section-inner medium">
             <PostCategories categories={categories} />
@@ -65,22 +77,18 @@ const post = (props) => {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
-        <DiscussionEmbed {...disqusConfig} />
+
         <div className="section-inner">
-          <AuthorBio author={author} />
           <ContentTypePagination
             previousPage={previousPage}
             nextPage={nextPage}
             contentType={"Post"}
-
           />
+          <DiscussionEmbed {...disqusConfig} />
           <PostFromSameCategory posts={relatedPosts}/>
-
-
-
         </div>
       </article>
-    </LayoutAntd>
+    </Layout>
   )
 }
 

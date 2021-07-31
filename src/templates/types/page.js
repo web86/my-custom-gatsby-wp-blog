@@ -10,7 +10,7 @@ const page = ({ data }) => {
 
   return (
     <LayoutAntd
-      bodyClass={`page-template-default page page-id-${databaseId} wp-embed-responsive singular missing-post-thumbnail has-no-pagination not-showing-comments footer-top-visible customize-support`}
+        className="page"
     >
       <Seo title={title} description={excerpt} socialImage={featuredImage?.node} uri={uri} />
 

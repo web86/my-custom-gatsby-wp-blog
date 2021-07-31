@@ -78,6 +78,7 @@ module.exports = async ({ actions, graphql }, options) => {
                 pageNumber: index + 1,
                 totalPages: chunkedContentNodes.length,
                 perPage,
+                catName: category.name,
               },
             })
           }),

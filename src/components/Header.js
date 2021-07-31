@@ -1,12 +1,9 @@
 import React from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
-import { Layout } from 'antd'
 import Logo from "../assets/images/logo.jpg"
 import Menu from "./Menu"
 import { header } from '../assets/main.less'
 import ToggleIcon from "../assets/svg/toggle.inline.svg"
-
-const { Header : AntdHeader } = Layout
 
 const Header = ({ pageContext, toggleBackdrop, ...props }) => {
   const { wp } = useStaticQuery(graphql`
@@ -20,7 +17,7 @@ const Header = ({ pageContext, toggleBackdrop, ...props }) => {
     }
   `)
   return (
-    <header id="site-header" className="header"  role="banner">
+    <div id="site-header" className="header">
           <div className="header-titles">
               <div className="left">
                 <Link to="/" className="logotip">
@@ -51,17 +48,15 @@ const Header = ({ pageContext, toggleBackdrop, ...props }) => {
                   onClick={(e) => toggleBackdrop(e, true)}
               >
                 <span className="toggle-inner">
-                  <span className="toggle-text">Menu</span>
                   <span className="toggle-icon">
                     <ToggleIcon />
                   </span>
                 </span>
               </button>
           </div>
-          <AntdHeader className="header">
-               <Menu/>
-          </AntdHeader>
-    </header>
+          <Menu/>
+
+    </div>
   )
 }
 

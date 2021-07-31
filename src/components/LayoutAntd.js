@@ -7,7 +7,7 @@ import UniversalLink from "./UniversalLink"
 import Header from "./Header"
 import MenuModal from "./MenuModal"
 
-const Layout = ({ children }) => {
+const LayoutAntd = ({ children }) => {
     const [backdropActive, setBackdropActive] = useState(false)
     const backdropClasses = " backdrop"
     const toggleBackdrop = (e, active) => {
@@ -15,6 +15,19 @@ const Layout = ({ children }) => {
         setBackdropActive(active)
     }
 
+    const { allWpCategory } = useStaticQuery(graphql`
+        {
+            allWpCategory {
+                nodes {
+                    name
+                    uri
+                    databaseId
+                }
+            }
+        }
+    `)
+
+    // console.log(allWpCategory.nodes)
     return (
         <div
             id={"GatsbyBody"}
@@ -38,13 +51,17 @@ const Layout = ({ children }) => {
                                 </div>
                             </Col>
                             <Col xs={24} lg={6} className="rightsidebar">
-                                <div className="widget-header">Навигация по статье:</div>
+                                <div className="widget-header">Рубрики</div>
                                 <ul className="categories">
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
+                                    {allWpCategory.nodes.map(item=>{
+                                        return (
+                                            <li key={item.databaseId}>
+                                                <UniversalLink to={item.uri} activeClassName={"current-menu-item current_page_item"}>
+                                                    <RightOutlined className="gray-arr-right"/> {item.name}
+                                                </UniversalLink>
+                                            </li>
+                                        )
+                                    })}
                                 </ul>
                             </Col>
                         </Row>
@@ -60,4 +77,6 @@ const Layout = ({ children }) => {
     )
 }
 
-export default Layout
+export default LayoutAntd
+
+

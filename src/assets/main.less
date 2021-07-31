@@ -1,0 +1,357 @@
+// Цвета на сайте
+@link: #db3157;
+@linkHover: #986bad;
+@mainColor: #333;
+body {background-color: #f9f8f5;}
+a {color:@linkHover}
+
+/* Header */
+.header {
+
+  /* Logo & site Description */
+
+  .header-titles {
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-between;
+
+    .left {
+      display: flex;
+    }
+
+    .logotip {
+      margin-right: 20px;
+
+      img {
+        border-radius: 50%;
+        box-shadow: 0px 0px 5px #999;
+      }
+    }
+
+    .site-branding-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .site-title {
+        font-size: 20px;
+        line-height: 1.1;
+        font-weight: 900;
+        @media (min-width: 700px) {
+          font-size: 28px;
+        }
+
+        a {
+          color: @link;
+          display: table-caption;
+          @media (min-width: 700px){
+            display: inherit
+          }
+        }
+      }
+      .site-description {
+        display: none;
+        @media (min-width: 700px) {
+          display: block;
+        }
+      }
+    }
+
+    //  modal btn toggler
+    .nav-toggle {
+      border: none;
+      background: no-repeat;
+      cursor: pointer;
+
+      svg {
+        width: 50px;
+        height: 49px;
+      }
+    }
+  }
+
+  /* Top Menu */
+
+  .primary-menu-wrapper {
+    background-image: linear-gradient(280deg, @link 0%, @linkHover 100%);
+    background-color: @linkHover;
+    padding: 0;
+    flex: 0 0 auto;
+    height: 4px;
+    @media (min-width:700px) {
+      height: 64px;
+      line-height: 64px;
+    }
+
+
+    ul {
+    list-style: none;
+    font-size: 16px;
+    padding-left: 20px;
+    display:none;
+    @media (min-width:700px) {
+        display: flex;
+    }
+
+    .parent {
+      position: relative;
+
+      .dropdown-menu {
+        position: absolute;
+        padding: 0;
+        width: 200px;
+        flex-direction: column;
+        background: #a3619e;
+        box-shadow: 0 5px 5px #0000002e;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        z-index: 10;
+        opacity: 0;
+        transition: all 0.5s ease;
+        visibility: hidden;
+      }
+
+      &:hover {
+        .dropdown-menu {
+          opacity: 1;
+          visibility: initial;
+        }
+      }
+    }
+
+    a {
+      color: #fff;
+      padding: 0 20px;
+      display: flex;
+      transition: background 0.5s ease;
+
+      .anticon {
+        align-self: center;
+        margin-left: 7px;
+        font-size: 13px;
+      }
+    }
+
+    .current-menu-item, a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+  }
+}
+}
+.main {
+  .leftsidebar {
+    article {
+      margin-bottom: 60px;
+
+      header {
+        h2 {
+          font-size: 30px;
+          margin-bottom: 20px;
+          font-weight: bold;
+          line-height: 1.1;
+
+          a {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            color: @mainColor;
+
+            &:hover {
+              color: @linkHover;
+            }
+          }
+        }
+
+        .post-meta-wrapper {
+          color: #999;
+
+          ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            li {
+              display: flex;
+              margin-right: 30px;
+
+              svg {
+                height: 12px;
+                margin-right: 4px;
+
+                path {
+                  fill: #999
+                }
+              }
+            }
+
+            .post-author, .post-categs {
+              display: none;
+              @media (min-width: 700px) {
+                display: flex;
+              }
+            }
+
+            .post-comment-link {
+              flex-grow: 1;
+              justify-content: flex-end;
+            }
+          }
+        }
+
+        .entry-categories {
+          display: flex;
+        }
+      }
+
+      .featured-media {
+        margin: 0 0 15px -24px;
+      }
+
+      .post-inner .more {
+        color: @link;
+      }
+      // Пагинация внутри поста
+      .pagination-single {
+        display: flex;
+        justify-content: space-between;
+        margin: 50px 0;
+        padding: 10px;
+        background: #f5f7fb;
+        a {
+          font-size: 20px;
+        }
+      }
+    }
+
+    // Пагинация постов в категории
+    .pagination {
+      margin-bottom: 35px;
+      text-align: center;
+
+      .nav-links {
+        > * {
+          display: inline-block;
+          padding: 6px 14px;
+          margin: 0 2px;
+          text-decoration: none;
+          background: #efede7;
+          color: #333;
+          border-radius: 3px;
+          -webkit-transition: all 0.3s ease;
+          -moz-transition: all 0.3s ease;
+          -o-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+        }
+        > span, > a:hover  {
+          background-color: @link;
+          color: #fff;
+        }
+
+      }
+    }
+    // Блок дополнительных 4 постов из этой же категории. На странице поста
+    .related-posts {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      margin-top:50px;
+      > h3 {
+        flex-basis: 100%;
+        text-align: center;
+        margin-bottom: 24px;
+        font-weight: bold;
+        font-size: 24px;
+      }
+      .post-from-same-category {
+        flex-basis: 50%;
+        padding: 0 10px;
+        .featured-media {
+          margin: 0;
+        }
+        .entry-header {
+          background: #f5f7fb;
+          border-radius: 10px 10px 0 0;
+          display: flex;
+          padding: 20px 0 0 20px;
+        }
+        .post-inner {
+          background: #f5f7fb;
+          border-radius: 0 0 10px 10px;
+          display: flex;
+          padding: 20px 10px 20px 20px;
+          flex-direction: column;
+          h3 {
+            font-size: 24px;
+            a {
+              border-bottom: 1px solid;
+            }
+          }
+        }
+      }
+    }
+  }
+  .rightsidebar {
+    .widget-header {
+      margin: 0 0 15px;
+      padding: 15px 0 14px;
+      font-weight: bold;
+      font-size: 18px;
+      border-bottom: 1px solid #dadada;
+    }
+    .categories {
+      list-style: none;
+      padding-left: 0;
+      li {
+        padding: 6px 0;
+        border-bottom: 1px solid #eee;
+        .gray-arr-right {
+          font-size: 12px;
+          color: darkgrey;
+          margin-right: 10px;
+        }
+        a {
+          color: @link;
+          font-size: 16px;
+          transition: color 0.5s ease;
+        &:hover {
+          color: @linkHover;
+        }
+        }
+      }
+    }
+  }
+  .footermenu {
+    background-image: linear-gradient(
+            280deg
+            , @link 0%, @linkHover 100%);
+    background-color: @linkHover;
+    padding: 0px 30px;
+    height: 60px;
+    line-height: 60px;
+    display: flex;
+    color: #fff;
+
+    span {
+      margin-right: 20px;
+      padding: 0 20px;
+      background: #e0509c;
+    }
+  }
+}
+// Хлебные крошки
+.breadcrumb__list {
+  list-style: none;
+  display: flex;
+  padding: 8px;
+  margin: 20px 0;
+  background: #fcfcfc;
+
+  .breadcrumb__separator {
+    margin: 0 10px;
+  }
+}
