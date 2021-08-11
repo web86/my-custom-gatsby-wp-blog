@@ -1,18 +1,24 @@
-import React, { useState } from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import React, { useState, useEffect } from "react"
+import { graphql, useStaticQuery} from "gatsby"
+import { Link, animateScroll as scroll, scrollSpy } from "react-scroll"
+import Sticky from 'react-sticky-el'
 import { main } from '../assets/main.less'
 import { Row, Col } from 'antd'
 import { UserOutlined, LaptopOutlined, NotificationOutlined, RightOutlined } from '@ant-design/icons'
+
 import UniversalLink from "./UniversalLink"
 import Header from "./Header"
 import MenuModal from "./MenuModal"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, content }) => {
     const [backdropActive, setBackdropActive] = useState(false)
     const backdropClasses = " backdrop"
     const toggleBackdrop = (e, active) => {
         e.preventDefault()
         setBackdropActive(active)
+    }
+    const scrollToTop = () => {
+        scroll.scrollToTop()
     }
 
     return (
@@ -38,23 +44,42 @@ const Layout = ({ children }) => {
                                 </div>
                             </Col>
                             <Col xs={24} lg={6} className="rightsidebar">
-                                <div className="widget-header">Навигация по статье:</div>
-                                <ul className="categories">
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                </ul>
+                                <Sticky>
+
+                                    <div className="widget-header">Навигация по статье:</div>
+                                    <ul className="sidebar-sticky-menu">
+                                        {content.map(lnk => {
+                                            return (
+                                                <li key={lnk.href}>
+                                                    <Link
+                                                        activeClass="active"
+                                                        to={lnk.href}
+                                                        spy={true}
+                                                        smooth="easeOutBack"
+                                                        offset={-70}
+                                                        duration={500}
+                                                        hashSpy={true}
+                                                    >
+                                                        {lnk.title}
+                                                    </Link>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+
+
+
+                                </Sticky>
+
                             </Col>
                         </Row>
                     </div>
                     <div className="footermenu">
-                        <span>Работаю с:</span> HTML, CSS, LESS, JS, Jquery, React, Redux, Gatsby, GraphQl, PHP, WP, Joomla, Opencart
+                        <span>Работаю с:</span> HTML, CSS, LESS, JS, Jquery, React, Redux, Gatsby, GraphQl, PHP, WP, Joomla, Opencart, Github
                     </div>
                 </div>
 
-                <div style={{padding: "24px"}}>© {new Date().getFullYear()}{" "}Блог айтишника-фрилансера</div>
+                <div style={{padding: "24px"}}>© {new Date().getFullYear()}{" "}Блог айтишника-фрилансера <a onClick={scrollToTop}>На верх</a></div>
             </div>
         </div>
     )

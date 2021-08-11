@@ -34,8 +34,26 @@ const post = (props) => {
     config: { identifier: post.uri },
   }
 
+  // находим начало и конец виджета навигации
+  const start = content.indexOf('<!--noindex--><div>')
+  const finish = content.lastIndexOf('<!--/noindex-->')
+  // выризаем из статьи блок виджета
+  const oglavlenie = content.substr(start, finish)
+  // парсим строку и вытасикваем из нее название и ссылку
+  const parser = new DOMParser();
+  const parsedHtml = parser.parseFromString(oglavlenie, "text/html");
+  let aTags = parsedHtml.getElementsByTagName("a");
+  let vocab = [];
+  for (let a of aTags) {
+    const title = a.getElementsByTagName('span')[0].innerHTML;
+    // const href = a.getAttribute("href");
+    const href = a.getAttribute("href").substring(1);
+    // складываем в массив
+    vocab.push( { title, href } )
+  }
+
   return (
-    <Layout
+    <Layout content={ vocab }
         className="post"
     >
       <Seo title={title} description={excerpt} socialImage={featuredImage?.node} uri={uri} />

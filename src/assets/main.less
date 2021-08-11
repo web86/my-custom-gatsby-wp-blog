@@ -303,7 +303,7 @@ a {color:@linkHover}
       font-size: 18px;
       border-bottom: 1px solid #dadada;
     }
-    .categories {
+    .categories, .sidebar-sticky-menu {
       list-style: none;
       padding-left: 0;
       li {
@@ -318,9 +318,12 @@ a {color:@linkHover}
           color: @link;
           font-size: 16px;
           transition: color 0.5s ease;
-        &:hover {
-          color: @linkHover;
+          &:hover {
+            color: @linkHover;
+          }
         }
+        a.active {
+          color: @linkHover;
         }
       }
     }

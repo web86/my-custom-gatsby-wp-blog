@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import LayoutAntd from "../../components/LayoutAntd"
 import Seo from "../../components/Seo"
 import FeaturedMedia from "../../components/FeaturedMedia"
+import ContactForm from "../../components/contactForm"
 
 const page = ({ data }) => {
   const { page } = data
@@ -35,6 +36,9 @@ const page = ({ data }) => {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
+
+        <ContactForm/>
+
       </article>
     </LayoutAntd>
   )
